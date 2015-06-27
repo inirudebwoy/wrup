@@ -1,0 +1,16 @@
+language: python
+env:
+- TOXENV=py34
+- TOXENV=py33
+- TOXENV=py27
+install: pip install tox
+script: tox
+
+deploy:
+  provider: pypi
+  user: mklich
+  password:
+    secure: T75Uv6nDbMMPAsrFLV0+RvWz5m8z1aQYyIQDUV6RmLpwJjNg5iJC1hk4R+d9wLkkz9663pV+tlVyOof4lFGc6MK1eHUzwp1TMQPJAxKDqUTCt1BOA3BmW8+xrPagZjAW4LiH7g15MvQP6NFqY/rT7Yqq4kRZkNZRFFo7c1A1GEyMzKUieNZpnTn3A+nF60k5YEFVc1iwarCXWjSknW+qvGTSpgNgUq9UwqAWkCID1UgEy/mx4kOdOp4ZQQU6EyU9oU7nA07+IHYNz6gRZC7iP10Dd7k3DObCjGlsQh7g0nW8YEZP9E3eqXIwFSSH8U/H29sWzc1xcMyZQQ/susqrC/T+Turr7ksTh4h2Gs/L8i7HOt/cLc7iae4kapXIvp3MauIPi5CqJOHB9EEIOozd5sb6Z5nbyzXvSgt9357Xu7+Vn2fgitTcIzl/uKncn5O2d7CxY2mcmQpR909dGCbAE6l7ZQhBJcNp3KoMCBpFhGdwN4ok6GKPMaiE25FHoqn8aPr9V4W737sBbTyE9ZsYpUhpDaut2aeK4s59wsGjzxFk53WL7XRJ3ok/dfVU8AND4Drm5nQFEhOM9QMtv9R1Ew/kDpd3EGlDMPQOoWoaHqINe2VGo0pXpcqPfnc4IMa2dY4UXR0nNn+pDY4grMHmbDiYZFxJ0Llfzdc8SdZj6GY=
+  on:
+    tags: true
+    repo: inirudebwoy/wrup

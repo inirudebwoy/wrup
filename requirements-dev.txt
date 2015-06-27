@@ -1,0 +1,5 @@
+tox
+bumpversion
+nose
+coverage
+
