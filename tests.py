@@ -1,4 +1,5 @@
 import os
+import random
 
 from nose import with_setup
 from click.testing import CliRunner
@@ -128,7 +129,7 @@ class TestInterface:
 
 class TestFunctions:
     @with_setup(create_posts, delete_posts)
-    def test_move_imported_post():
+    def test_move_imported_post(self):
         _move_imported('test_post1.txt', '_Imported')
 
         assert os.path.exists('_Imported/test_post1.txt')
