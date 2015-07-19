@@ -15,10 +15,11 @@ REST_API_POSTS_PATH = 'posts'
 
 
 @click.command()
-@click.option('--url', prompt=True)
-@click.option('--username', prompt=True)
-@click.password_option()
+@click.option('--url', prompt=True, help='Url to blog')
+@click.option('--username', prompt=True, help='Username to use for upload')
+@click.password_option(help='Password for selected user')
 def wrup_cli(url, username, password):
+    """ Simple blog post uploader to wordpress blogs """
     uploaded = []
     failed = []
     click.echo('Posts uploaded to %s' % url)

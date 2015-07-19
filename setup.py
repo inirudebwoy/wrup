@@ -16,6 +16,7 @@ setup(
     author='Michal Klich',
     author_email='michal@michalklich.com',
     include_package_data=False,
+    install_requires=['click', 'requests'],
     # packages=['wrup'],
     url='https://github.com/inirudebwoy/wrup',
     classifiers=[
