@@ -1,6 +1,6 @@
 #  -*- coding: utf-8 -*-
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from ez_setup import use_setuptools
     use_setuptools()
@@ -9,16 +9,19 @@ except ImportError:
 
 setup(
     name='wrup',
-    version="0.0.1",
+    version="0.0.2",
     description='Upload posts to wordpress',
     long_description=open('README.rst').read(),
     license='GPLv2',
     author='Michal Klich',
     author_email='michal@michalklich.com',
     include_package_data=False,
+    py_modules=['wrup'],
     install_requires=['click', 'requests'],
-    # packages=['wrup'],
     url='https://github.com/inirudebwoy/wrup',
+    entry_points={
+        'console_scripts': ['wrup = wrup:wrup_cli']
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',
