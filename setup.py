@@ -9,7 +9,7 @@ except ImportError:
 
 setup(
     name='wrup',
-    version="0.0.2",
+    version="0.0.3",
     description='Upload posts to wordpress',
     long_description=open('README.rst').read(),
     license='GPLv2',
