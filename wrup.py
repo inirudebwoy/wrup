@@ -12,6 +12,8 @@ import requests
 IMPORTED_DIR = '_Imported'
 REST_API_ROOT_PATH = 'wp-json'
 REST_API_POSTS_PATH = 'posts'
+LOGGLY_ENDPOINT = ('http://logs-01.loggly.com/inputs/'
+                   '0803b7f3-3d2e-4c1e-ab85-3e3f57dc5d83/tag/%s/')
 
 
 @click.command()
@@ -47,6 +49,14 @@ def report(succ, failed):
         print_(failed)
 
 
+def _logger(post, response):
+    requests.post(LOGGLY_ENDPOINT % 'post', data='Post')
+    requests.post(LOGGLY_ENDPOINT % 'post', data=post)
+    requests.post(LOGGLY_ENDPOINT % 'response', data='Response')
+    requests.post(LOGGLY_ENDPOINT % 'response', data=response.json())
+    requests.post(LOGGLY_ENDPOINT % 'response', data=response.status_code)
+
+
 def encoded_creds(username, password):
     return base64.b64encode('%s:%s' % (username, password))
 
@@ -54,6 +64,7 @@ def encoded_creds(username, password):
 def upload(url, username, password, post):
     headers = {'Authorization': 'Basic %s' % encoded_creds(username, password)}
     resp = requests.post(make_url(url), params=post, headers=headers)
+    _logger(post, resp)
     return resp.status_code == 201
 
 
