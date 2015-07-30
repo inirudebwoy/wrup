@@ -48,32 +48,21 @@ def report(succ, failed):
         print_(failed)
 
 
-def _logger(post, response):
-    log_file = open(LOG_FILE, 'w+')
-    log_file.write('post' + os.linesep)
-    log_file.write('-' * 20 + os.linesep)
-    log_file.write(post + os.linesep)
-    log_file.write('response' + os.linesep)
-    log_file.write('-' * 20 + os.linesep)
-    log_file.write(response + os.linesep)
-
-
 def encoded_creds(username, password):
     return base64.b64encode('%s:%s' % (username, password))
 
 
 def upload(url, username, password, post):
     headers = {'Authorization': 'Basic %s' % encoded_creds(username, password)}
-    resp = requests.post(make_url(url), params=post, headers=headers)
-    _logger(post, resp)
+    resp = requests.post(make_url(url), data=post, headers=headers)
     return resp.status_code == 201
 
 
 def post_from_path(path):
     date = datetime.fromtimestamp(os.path.getmtime(path))
-    return {'data[date]': date.strftime('%Y-%m-%dT%H:%M:%SZ'),
-            'data[title]': os.path.splitext(path)[0],
-            'data[content_raw]': open(path).read()}
+    return {'date': date.strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'title': os.path.splitext(path)[0],
+            'content_raw': open(path).read()}
 
 
 def make_url(url):
