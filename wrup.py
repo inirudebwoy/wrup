@@ -24,6 +24,7 @@ def wrup_cli(url, username, password):
     uploaded = []
     failed = []
     click.echo('Posts uploaded to %s' % url)
+
     for file_ in post_list(u'.'):
         post = post_from_path(file_)
         if upload(url, username, password, post):
@@ -60,6 +61,8 @@ def upload(url, username, password, post):
 
 def post_from_path(path):
     date = datetime.fromtimestamp(os.path.getmtime(path))
+    cur_dir = os.path.abspath(os.path.curdir)
+    category = os.path.split(cur_dir)[1]
     return {'date': date.strftime('%Y-%m-%dT%H:%M:%SZ'),
             'title': os.path.splitext(path)[0],
             'content_raw': open(path).read()}
